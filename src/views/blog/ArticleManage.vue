@@ -157,7 +157,8 @@
         <el-form-item label="内容">
           <mavon-editor v-model="articleEditIng.articleBodyDTO.markdown" :toolbars="toolbars" code-style="agate" :transition="true" style="margin: 10px 0 20px 0" @keydown="" @imgAdd="addImg" @imgDel="delImg" ref=md />
         </el-form-item>
-        <div style="margin-left: 95%">
+        <div style="margin-left: 80%;display: ">
+          <el-button @click="dialogArticleEdit = false">取消编辑</el-button>
           <el-button type="primary" @click="updateArticle">保存编辑</el-button>
         </div>
       </el-form>
@@ -275,7 +276,7 @@ export default {
       formdata.append('multipartFile', file)
       this.img_file[pos] = file
       uploadImage(formdata).then(res => {
-        this.$refs.md.$img2Url(pos, res.data)
+        this.$refs.md.$img2Url(pos, res.data.data)
       })
     },
     delImg(pos){
@@ -283,7 +284,7 @@ export default {
     },
     putOnArticle(id) {
       putOnArticle(id).then(res => {
-        if (res.data) {
+        if (res.data.data) {
           this.$message({
             showClose: true,
             message: '变更成功',
@@ -357,7 +358,7 @@ export default {
     },
     editArticle(row) {
       articleBody(row.id).then(res => {
-        this.articleEditIng = res.data
+        this.articleEditIng = res.data.data
       })
       this.dialogArticleEdit = true
     },
