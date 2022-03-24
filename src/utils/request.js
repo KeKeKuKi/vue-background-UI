@@ -8,7 +8,8 @@ export const request = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   withCredentials: false
 })
-let gateway = 'http://localhost:8600'
+// let gateway = 'http://localhost:8600'
+let gateway = 'http://162.14.77.8:8600'
 
 
 export const blogService = axios.create({
